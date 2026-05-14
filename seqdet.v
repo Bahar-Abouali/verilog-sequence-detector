@@ -77,7 +77,7 @@ always @(Pstate, a) begin
 
         G100 : begin if (a==1)
                         nstate = G1001;
-                        y = 1
+                        y = 1;
                     else
                         nstate = G00;
         end
@@ -86,7 +86,7 @@ always @(Pstate, a) begin
                         nstate = G1;
                     else
                         nstate = G0010;
-                        y = 1
+                        y = 1;
         end
         
     endcase
