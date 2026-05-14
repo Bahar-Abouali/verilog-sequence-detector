@@ -1,4 +1,7 @@
-module seqdet(input clk, reset, a output y);
+module seqdet (
+    input clk, reset, a,
+    output reg y
+);
 
 parameter [3:0]
    INIT  = 4'b0000,
@@ -12,13 +15,16 @@ parameter [3:0]
    G1001 = 4'b1000;
 
 reg [3:0] Pstate, nstate;
-always @(posedge clk )
+
+always @(posedge clk)
    if (reset)
       Pstate = INIT;
     else
        Pstate = nstate;
 
 always @(Pstate, a) begin
+    nstate = INIT;
+    y = 0;
     case (Pstate)
         INIT : begin if (a==1)
                         nstate = G1;
@@ -85,3 +91,5 @@ always @(Pstate, a) begin
         
     endcase
 end
+
+endmodule
