@@ -78,6 +78,19 @@ This project helped me understand practical digital design concepts using Verilo
 It also improved my understanding of FSM design and simulation-based verification using ModelSim.
 
 ---
+## State Diagram
+
+The state machine used in this design:
+
+![state diagram](<state diagram.jpg>)
+
+---
+
+## Waveform Output
+
+Simulation waveform from ModelSim:
+
+![wave form](waveform.png)
 
 ## Author
 Computer Engineering Student  'Bahar Abouali'
