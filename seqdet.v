@@ -18,76 +18,65 @@ reg [3:0] Pstate, nstate;
 
 always @(posedge clk)
    if (reset)
-      Pstate = INIT;
+      Pstate <= INIT;
     else
-       Pstate = nstate;
+       Pstate <= nstate;
 
 always @(Pstate, a) begin
     nstate = INIT;
     y = 0;
     case (Pstate)
-        INIT : begin if (a==1)
-                        nstate = G1;
-                    else
-                        nstate = G0;
-                    y = 0;
-        end
+        INIT : if (a==1)
+                    nstate = G1;
+                else
+                    nstate = G0;
 
-        G0   : begin if (a==1)
-                        nstate = G1;
-                    else
-                        nstate = G00;
-                    y = 0;
-        end
+        G0   : if (a==1)
+                    nstate = G1;
+                else
+                    nstate = G00;
 
-        G00  : begin if (a==1)
-                        nstate = G001;
-                    else
-                        nstate = G00;
-                    y = 0;
-        end
+        G00  : if (a==1)
+                    nstate = G001;
+                else
+                    nstate = G00;
 
-        G001 : begin if (a==1)
-                        nstate = G1;
-                    else
-                        nstate = G0010;
-                        y = 1;
-        end
+        G001 : if (a==1)
+                    nstate = G1;
+                else begin
+                    nstate = G0010;
+                    y = 1;
+                end
 
-        G0010: begin if (a==1)
-                        nstate = G1;
-                    else
-                        nstate = G100;
-                    y = 0;
-        end
+        G0010: if (a==1)
+                    nstate = G1;
+                else
+                    nstate = G100;
 
-        G1   : begin if (a==1)
-                        nstate = G1;
-                    else
-                        nstate = G10;
-                    y = 0;
-        end
 
-        G10  : begin if (a==1)
-                        nstate = G1;
-                    else
-                        nstate = G100;
-                    y = 0;
-        end
+        G1   : if (a==1)
+                    nstate = G1;
+                else
+                    nstate = G10;
 
-        G100 : begin if (a==1)
+        G10  : if (a==1)
+                    nstate = G1;
+                else
+                    nstate = G100;
+
+        G100 : if (a==1) begin
                         nstate = G1001;
                         y = 1;
+                    end
                     else
                         nstate = G00;
-        end
 
-        G1001: begin if (a==1)
+        G1001: if (a==1)
                         nstate = G1;
-                    else
+                    else begin
                         nstate = G0010;
                         y = 1;
-        end
+                    end
         
     endcase
 end
